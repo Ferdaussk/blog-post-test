@@ -19,7 +19,7 @@ class CallBlogFromBWD {
 		add_filter( 'script_loader_tag', [ $this, 'bwdbp_admin_editor_scripts_as_a_module' ], 10, 2 );
 		add_action( 'single_template', [$this, 'bwdbp_event_single_page'] );
 	}
-	function event_single_page( $single ) {
+	function bwdbp_event_single_page( $single ) {
 		global $post;
 		if ( $post->post_type == 'post' &&  is_singular( 'post' ) ) {
 		    $plugin_template = 'single.php';
