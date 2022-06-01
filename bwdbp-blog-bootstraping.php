@@ -17,6 +17,17 @@ class CallBlogFromBWD {
 
 	public function bwdbp_admin_editor_scripts() {
 		add_filter( 'script_loader_tag', [ $this, 'bwdbp_admin_editor_scripts_as_a_module' ], 10, 2 );
+		add_action( 'single_template', [$this, 'bwdbp_event_single_page'] );
+	}
+	function event_single_page( $single ) {
+		global $post;
+		if ( $post->post_type == 'post' &&  is_singular( 'post' ) ) {
+		    $plugin_template = 'single.php';
+		    if ( file_exists( $plugin_template ) ) {
+			$single = $plugin_template ;
+		    }
+		}
+		return $single;
 	}
 	public function bwdbp_admin_editor_scripts_as_a_module( $tag, $handle ) {
 		if ( 'bwdbp_the_blog_editor' === $handle ) {
